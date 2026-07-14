@@ -2,6 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import ModalMorador from "@/components/ModalMorador";
+import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
+
 
 type Morador = {
   id: string;
@@ -71,9 +73,11 @@ function Painel() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 text-white">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Painel da Portaria</h1>
+    <SidebarProvider>
+      <div className="min-h-screen bg-background p-4 text-white">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl font-bold mb-6">Painel da Portaria</h1>
+
 
         {/* AQUI VAI TEU CONTEÚDO ATUAL: PENDENTES, ETC */}
         <div className="bg-black/30 p-4 rounded-xl mb-4 border border-zinc-800">
@@ -81,6 +85,7 @@ function Painel() {
         </div>
 
         {/* BOTÃO CADASTRAR NA SIDEBAR - TROCA O ONCLICK DO TEU BOTÃO ATUAL */}
+
         {/* Procura onde tem o botão "Cadastrar" e troca o onClick por: onClick={abrirCadastro} */}
 
         {/* GESTÃO DE MORADORES */}
@@ -126,17 +131,18 @@ function Painel() {
             )}
           </div>
         </div>
-      </div>
+        </div>
 
-      <ModalMorador
-        aberto={modalAberto}
-        moradorEditando={editando}
-        onClose={() => {
-          setModalAberto(false);
-          setEditando(null);
-        }}
-        onSalvou={buscarMoradores}
-      />
-    </div>
+        <ModalMorador
+          aberto={modalAberto}
+          moradorEditando={editando}
+          onClose={() => {
+            setModalAberto(false);
+            setEditando(null);
+          }}
+          onSalvou={buscarMoradores}
+        />
+      </div>
+    </SidebarProvider>
   );
 }
