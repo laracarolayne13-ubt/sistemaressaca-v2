@@ -24,6 +24,8 @@ export default defineConfig({
         workbox: {
           navigateFallback: "/",
           navigateFallbackDenylist: [/^\/~oauth/, /^\/api\//],
+          // Evita warning do PWA em builds do TanStack/Nitro (assets vão para .output/public).
+          globDirectory: ".output/public",
           globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,jpg,woff2}"],
           runtimeCaching: [
             {

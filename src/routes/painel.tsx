@@ -1,20 +1,20 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import ModalMorador from "@/components/ModalMorador";
+import ModalMorador from "@/components/ui/ModalMorador";
 import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
 
 
 type Morador = {
   id: string;
   nome: string;
-  unidade: string;
+  Otimo: string;
   WhatsApp?: string;
   created_at?: string;
 };
 
 export const Route = createFileRoute("/painel")({
-  head: () => ({ meta: [{ title: "Painel Ressaca â€” Portaria" }] }),
+  head: () => ({ meta: [{ title: "Painel Ressaca — Portaria" }] }),
   component: PainelProtegido,
 });
 
@@ -39,7 +39,7 @@ function PainelProtegido() {
     };
   }, [navigate]);
 
-  if (verificando) return <div className="min-h-screen bg-background" aria-label="Verificando sessÃ£o" />;
+  if (verificando) return <div className="min-h-screen bg-background" aria-label="Verificando sessão" />;
   if (!autenticado) return <div className="min-h-screen bg-background" aria-label="Redirecionando para login" />;
   return <Painel />;
 }
@@ -50,9 +50,9 @@ function Painel() {
   const [editando, setEditando] = useState<Morador | null>(null);
 
   const buscarMoradores = async () => {
-    const { data, error } = await supabase.from("moradores").select("*").order("unidade");
+    const { data, error } = await supabase.from("moradores").select("*").order("Otimo");
     if (error) return console.error(error);
-    setMoradores(data || []);
+    setMoradores((data ?? []) as unknown as Morador[]);
   };
 
   useEffect(() => {
@@ -79,16 +79,16 @@ function Painel() {
           <h1 className="text-3xl font-bold mb-6">Painel da Portaria</h1>
 
 
-        {/* AQUI VAI TEU CONTEÃšDO ATUAL: PENDENTES, ETC */}
+        {/* AQUI VAI TEU CONTEÚDO ATUAL: PENDENTES, ETC */}
         <div className="bg-black/30 p-4 rounded-xl mb-4 border border-zinc-800">
           <p className="opacity-70">Pendentes aqui...</p>
         </div>
 
-        {/* BOTÃƒO CADASTRAR NA SIDEBAR - TROCA O ONCLICK DO TEU BOTÃƒO ATUAL */}
+        {/* BOTÃO CADASTRAR NA SIDEBAR - TROCA O ONCLICK DO TEU BOTÃO ATUAL */}
 
-        {/* Procura onde tem o botÃ£o "Cadastrar" e troca o onClick por: onClick={abrirCadastro} */}
+        {/* Procura onde tem o botão "Cadastrar" e troca o onClick por: onClick={abrirCadastro} */}
 
-        {/* GESTÃƒO DE MORADORES */}
+        {/* GESTÃO DE MORADORES */}
         <div className="bg-black/30 p-4 rounded-xl border border-zinc-800">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">Moradores Cadastrados</h2>
@@ -104,7 +104,7 @@ function Painel() {
             {moradores.map((m) => (
               <div key={m.id} className="bg-black/20 p-3 rounded flex justify-between items-center">
                 <div>
-                  <p className="font-bold">{m.unidade} â€” {m.nome}</p>
+                  <p className="font-bold">{m.Otimo} — {m.nome}</p>
                   <p className="text-sm opacity-70">{m.WhatsApp}</p>
                 </div>
                 <div className="flex gap-2">

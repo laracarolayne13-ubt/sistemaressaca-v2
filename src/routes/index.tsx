@@ -145,6 +145,11 @@ export const Route = createFileRoute("/")({
 
 export function Painel() {
   const qc = useQueryClient();
+  const abrirCadastro = () => {
+    setEditando(null);
+    setModalAberto(true);
+  };
+
   const navigate = useNavigate();
   const [tema, setTema] = useState<Tema>("foto");
   const [tocando, setTocando] = useState(false);
@@ -386,7 +391,7 @@ export function Painel() {
             <MenuButton
               icon="👤"
               variant="muted"
-              onClick={() => alert("Cadastro em breve")}
+              onClick={abrirCadastro}
               hint="Adicionar morador"
             >
               Cadastrar
