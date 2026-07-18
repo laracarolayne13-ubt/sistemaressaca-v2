@@ -1,5 +1,4 @@
-export const Route = createFileRoute("/")({component: Painel,})
-import { createFileRoute, Navigate, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BarcodeFormat, BrowserMultiFormatReader, DecodeHintType } from "@zxing/library";
@@ -144,7 +143,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Gestão de encomendas da Associação Moradores Bairro Ressaca." },
     ],
   }),
-  component: () => <Navigate to="/painel" replace />,
+  component: Painel,
 });
 
 export function Painel() {
