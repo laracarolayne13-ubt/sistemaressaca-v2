@@ -1,3 +1,4 @@
+export const Route = createFileRoute("/")({component: Painel,})
 import { createFileRoute, Navigate, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
