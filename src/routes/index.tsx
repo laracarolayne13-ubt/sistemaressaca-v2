@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import ubatuba from "@/assets/ubatuba.jpg";
+import { ModalMorador } from "@/components/ModalMorador"; 
+
 import {
   flushOutbox,
   outboxCount,
@@ -18,6 +20,7 @@ import {
   resolveConflict,
   type Conflict,
 } from "@/lib/offline-outbox";
+const [modalMorador, setModalMorador] = useState(false);
 
 const EMPRESAS_COMUNS = [
   "Correios",
@@ -145,11 +148,6 @@ export const Route = createFileRoute("/")({
 
 export function Painel() {
   const qc = useQueryClient();
-  const abrirCadastro = () => {
-    setEditando(null);
-    setModalAberto(true);
-  };
-
   const navigate = useNavigate();
   const [tema, setTema] = useState<Tema>("foto");
   const [tocando, setTocando] = useState(false);
@@ -391,7 +389,7 @@ export function Painel() {
             <MenuButton
               icon="👤"
               variant="muted"
-              onClick={abrirCadastro}
+              onClick={() => setModalNova(true)}
               hint="Adicionar morador"
             >
               Cadastrar
@@ -2123,7 +2121,9 @@ function FotoModal({ url, onClose }: { url: string; onClose: () => void }) {
         >
           🌐 Abrir imagem original
         </a>
+
       </div>
+      
     </div>
   );
 }
