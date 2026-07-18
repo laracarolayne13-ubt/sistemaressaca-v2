@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import ModalMorador from "@/components/ui/ModalMorador";
+import { ModalMorador } from "@/components/ui/ModalMorador";
 import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
 
 
