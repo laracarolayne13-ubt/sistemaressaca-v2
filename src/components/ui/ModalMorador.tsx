@@ -50,7 +50,7 @@ export default function ModalMorador({ aberto, onClose, moradorEditando, onSalvo
 
     if (moradorEditando) {
       const { error } = await supabase
-       .from("mora")
+       .from("moradores")
        .update(dados)
        .eq("id", moradorEditando.id);
       
@@ -61,7 +61,7 @@ export default function ModalMorador({ aberto, onClose, moradorEditando, onSalvo
       }
     } else {
       const { error } = await supabase
-       .from("mora")
+       .from("moradores")
        .insert(dados);
       
       if (error) {
@@ -92,7 +92,7 @@ export default function ModalMorador({ aberto, onClose, moradorEditando, onSalvo
         
         <input
           className="bg-black/40 p-3 rounded w-full mb-3 outline-none text-white placeholder:text-zinc-500"
-          placeholder="Nome - Ex: João Silva"
+          placeholder="Nome - Ex: JoÃ£o Silva"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
           disabled={salvando}

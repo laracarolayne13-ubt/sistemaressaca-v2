@@ -8,13 +8,13 @@ import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
 type Morador = {
   id: string;
   nome: string;
-  Otimo: string;
+  unidade: string;
   WhatsApp?: string;
   created_at?: string;
 };
 
 export const Route = createFileRoute("/painel")({
-  head: () => ({ meta: [{ title: "Painel Ressaca — Portaria" }] }),
+  head: () => ({ meta: [{ title: "Painel Ressaca â€” Portaria" }] }),
   component: PainelProtegido,
 });
 
@@ -39,7 +39,7 @@ function PainelProtegido() {
     };
   }, [navigate]);
 
-  if (verificando) return <div className="min-h-screen bg-background" aria-label="Verificando sessão" />;
+  if (verificando) return <div className="min-h-screen bg-background" aria-label="Verificando sessÃ£o" />;
   if (!autenticado) return <div className="min-h-screen bg-background" aria-label="Redirecionando para login" />;
   return <Painel />;
 }
@@ -50,7 +50,7 @@ function Painel() {
   const [editando, setEditando] = useState<Morador | null>(null);
 
   const buscarMoradores = async () => {
-    const { data, error } = await supabase.from("mora").select("*").order("Otimo");
+    const { data, error } = await supabase.from("moradores").select("*").order("unidade");
     if (error) return console.error(error);
     setMoradores(data || []);
   };
@@ -61,7 +61,7 @@ function Painel() {
 
   const remover = async (id: string) => {
     if (confirm("Remover esse morador?")) {
-      const { error } = await supabase.from("mora").delete().eq("id", id);
+      const { error } = await supabase.from("moradores").delete().eq("id", id);
       if (error) return alert("Erro ao remover");
       buscarMoradores();
     }
@@ -79,16 +79,16 @@ function Painel() {
           <h1 className="text-3xl font-bold mb-6">Painel da Portaria</h1>
 
 
-        {/* AQUI VAI TEU CONTEÚDO ATUAL: PENDENTES, ETC */}
+        {/* AQUI VAI TEU CONTEÃšDO ATUAL: PENDENTES, ETC */}
         <div className="bg-black/30 p-4 rounded-xl mb-4 border border-zinc-800">
           <p className="opacity-70">Pendentes aqui...</p>
         </div>
 
-        {/* BOTÃO CADASTRAR NA SIDEBAR - TROCA O ONCLICK DO TEU BOTÃO ATUAL */}
+        {/* BOTÃƒO CADASTRAR NA SIDEBAR - TROCA O ONCLICK DO TEU BOTÃƒO ATUAL */}
 
-        {/* Procura onde tem o botão "Cadastrar" e troca o onClick por: onClick={abrirCadastro} */}
+        {/* Procura onde tem o botÃ£o "Cadastrar" e troca o onClick por: onClick={abrirCadastro} */}
 
-        {/* GESTÃO DE MORADORES */}
+        {/* GESTÃƒO DE MORADORES */}
         <div className="bg-black/30 p-4 rounded-xl border border-zinc-800">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">Moradores Cadastrados</h2>
@@ -104,7 +104,7 @@ function Painel() {
             {moradores.map((m) => (
               <div key={m.id} className="bg-black/20 p-3 rounded flex justify-between items-center">
                 <div>
-                  <p className="font-bold">{m.Otimo} — {m.nome}</p>
+                  <p className="font-bold">{m.unidade} â€” {m.nome}</p>
                   <p className="text-sm opacity-70">{m.WhatsApp}</p>
                 </div>
                 <div className="flex gap-2">
