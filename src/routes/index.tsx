@@ -19,8 +19,8 @@ import {
   conflictsCount,
   resolveConflict,
   type Conflict,
-} from "@/lib/offline-outbox";
-const [modalMorador, setModalMorador] = useState(false);
+}
+ from "@/lib/offline-outbox";
 
 const EMPRESAS_COMUNS = [
   "Correios",
