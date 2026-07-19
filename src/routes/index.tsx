@@ -155,6 +155,8 @@ export function Painel() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [modalNova, setModalNova] = useState(false);
   const [cadastroAberto, setCadastroAberto] = useState(false);
+  const [moradorEditando, setMoradorEditando] = useState<any>(null);
+
 
   const [modalEntrega, setModalEntrega] = useState<string | null>(null);
   const [historicoAberto, setHistoricoAberto] = useState(false);
