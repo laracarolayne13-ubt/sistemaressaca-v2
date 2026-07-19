@@ -389,7 +389,7 @@ export function Painel() {
             <MenuButton
               icon="👤"
               variant="muted"
-              onClick={() => setModalNova(true)}
+              onClick={() => setCadastroAberto(true)}
               hint="Adicionar morador"
             >
               Cadastrar
