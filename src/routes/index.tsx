@@ -6,7 +6,8 @@ import { toast } from "sonner";
 import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import ubatuba from "@/assets/ubatuba.jpg";
-import { ModalMorador } from "@/components/ModalMorador"; 
+import { ModalMorador } from "@/components/ModalMorador";
+
 
 import {
   flushOutbox,
@@ -391,11 +392,15 @@ export function Painel() {
             <MenuButton
               icon="👤"
               variant="muted"
-              onClick={() => setCadastroAberto(true)}
+              onClick={() => {
+                setMoradorEditando(null)
+                setCadastroAberto(true)
+              }}
               hint="Adicionar morador"
             >
               Cadastrar
             </MenuButton>
+
             <MenuButton
               icon="⚙"
               variant="amber"
