@@ -153,6 +153,8 @@ export function Painel() {
   const [tocando, setTocando] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [modalNova, setModalNova] = useState(false);
+  const [cadastroAberto, setCadastroAberto] = useState(false);
+
   const [modalEntrega, setModalEntrega] = useState<string | null>(null);
   const [historicoAberto, setHistoricoAberto] = useState(false);
   const [modalConfig, setModalConfig] = useState(false);
@@ -389,7 +391,7 @@ export function Painel() {
             <MenuButton
               icon="👤"
               variant="muted"
-              onClick={() => setModalNova(true)}
+              onClick={() => setCadastroAberto(true)}
               hint="Adicionar morador"
             >
               Cadastrar
@@ -655,6 +657,18 @@ export function Painel() {
             onDismiss={() => setIdle(false)}
           />
         )}
+
+        {cadastroAberto && (
+          <CadastroMoradorModal
+            unidadeInicial={""}
+            atual={null}
+            onClose={() => setCadastroAberto(false)}
+            onSaved={(m) => {
+              setCadastroAberto(false);
+            }}
+          />
+        )}
+
       </div>
     </div>
   );
